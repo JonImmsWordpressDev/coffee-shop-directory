@@ -1,51 +1,85 @@
-# ☕ Omaha Coffee Shop Directory
+# ☕ Coffee Shop Directory
 
-A professional-grade WordPress plugin for showcasing and filtering coffee shops in Omaha — with custom blocks, maps, radius search, and a beautiful UI. Fully block-based and built for Full Site Editing.
+A modern, block-based WordPress plugin for creating a beautiful, filterable directory of coffee shops — complete with maps, opening hours, "open now" logic, and ZIP-based radius filtering.
 
----
+## 🔥 Features
 
-## 🚀 Features
-
-- ✅ Gutenberg-compatible with custom block (`Map & Filters`)
-- 🗺️ Leaflet.js-powered interactive map
-- 🔍 AJAX filtering by:
-  - Neighborhood
-  - WiFi Available
-  - Drive-Thru
-  - “Open Now” status
-  - ZIP code + Radius
-- 📅 Opening hours (per day or same every day)
-- ⏰ “Open Now” logic with local timezones
-- 📍 Distance display (“2.5 miles away”)
-- 🎨 Clean, responsive SCSS-based design
-- 🌗 Automatic light/dark mode support
-- 🧱 FSE-ready archive and single templates
-- ⭐️ Future features: Favorites, Geolocation, Reviews
+- Custom Post Type: `coffee_shop`
+- Custom Taxonomy: `neighborhood`
+- Custom Gutenberg block: `Map & Filters`
+- Interactive map using Leaflet
+- AJAX filtering (neighborhood, WiFi, drive-thru, open now, ZIP radius)
+- Admin meta panel for entering all shop details
+- Distance calculation with ZIP-based proximity search
+- Full compatibility with Full Site Editing (FSE)
+- Weekly opening hours support (per-day or same every day)
+- Live “Open Now” status with time zone handling
+- SCSS-powered styles and utility classes
+- Responsive design out of the box
+- Directions link to Google Maps
+- Ready for GitHub and WP Plugin Directory
 
 ---
 
-## 🧩 Custom Block: `Map & Filters`
+## 🧩 Block Editor Support
 
-- Inserts filter UI + map in any post, page, or template
-- Register with `ocd/map-filter`
-- Fully dynamic with AJAX-powered results
+The plugin includes a custom block: `ocd/map-filter`  
+Add it to any block template or post/page to show the filter + map.
+
+Templates provided:
+
+- `archive-coffee_shop`
+- `single-coffee_shop`
+
+These are auto-registered and visible under **Appearance → Editor → Templates**.
+
+---
+
+## 🧰 Custom Fields (Meta)
+
+Each Coffee Shop post supports:
+
+- Address (auto-geocoded)
+- Latitude / Longitude
+- Website URL
+- WiFi toggle
+- Drive-thru toggle
+- Weekly Opening Times (or same hours for all days)
+- Neighborhood (via custom taxonomy)
+
+All fields are managed through the **Gutenberg sidebar panel**:  
+🛠 **Coffee Shop Details**
+
+---
+
+## 📍 AJAX Filtering
+
+Supports:
+
+- Neighborhood select
+- WiFi / Drive-thru toggles
+- "Open Now" checkbox
+- ZIP code input
+- Radius (miles) select
+
+Filter results update the:
+
+- Coffee shop cards
+- Map markers (via Leaflet.js)
 
 ---
 
 ## 📦 Installation
 
-1. Clone or download this plugin into your WordPress install:
-git clone https://github.com/yourusername/coffee-shop-directory.git wp-content/plugins/coffee-shop-directory
+1. Clone this repo to your plugins folder:
 
-2. Activate the plugin in **Plugins > Installed Plugins**
+    ```bash
+    git clone https://github.com/yourusername/coffee-shop-directory.git wp-content/plugins/coffee-shop-directory
+    ```
 
-3. Optionally, use the provided FSE block templates:
-   - `archive-coffee_shop.html`
-   - `single-coffee_shop.html`
+2. Activate the plugin in **Plugins → Installed Plugins**
 
-4. Go to **Coffee Shops > Add New** to start adding listings
-
-5. Edit the archive template in the Site Editor and insert the `Map & Filters` block
+3. Visit **Coffee Shops** in the admin menu and start adding shops.
 
 ---
 
@@ -55,80 +89,38 @@ git clone https://github.com/yourusername/coffee-shop-directory.git wp-content/p
 
 SCSS files are located in `/scss`. To compile:
 
-npm install
-npm run watch
+    npm install
+    npm run watch
 
- or
+Or manually:
 
-sass --watch scss/style.scss css/style.css
+    sass --watch scss/style.scss css/style.css
 
----
+### JS
 
-## 📍 Radius + ZIP Filtering
-
-- Users can enter a ZIP code and radius (in miles)
-- ZIPs are geocoded using OpenStreetMap Nominatim
-- Haversine formula is used to calculate distance between ZIP and each coffee shop
-- Listings are filtered and sorted accordingly
-- Distance is displayed on each card (e.g. “3.2 miles away”)
+- `/js/filter.js` — handles AJAX filter + map markers  
+- `/js/editor.js` — meta panel in the post editor  
+- `/js/theme-mode.js` — detects system theme preference
 
 ---
 
-## 🕰 Opening Hours
+## 🚀 Roadmap
 
-- You can set:
-  - Same opening hours for all days **OR**
-  - Specific open/close times per weekday
-- Fields saved via custom post meta
-- Admin UI uses `type="time"` inputs
-- “Open Now” badge appears automatically if the current time is within today's hours
-
----
-
-## 🧠 Smart Logic
-
-- `ocd_is_open_now()` logic is reusable and hooked into filters
-- Archive filtering uses AJAX + `wp_ajax` to avoid full page reloads
-- Cards are rendered via `card.php` and dynamically inserted into DOM
-- ZIP + distance logic logs info to error log for easy debugging
+- Saved favorites
+- Pagination UI
+- Better drag/drop ordering
+- Custom post importer
+- Category-level stats
+- Premium version?
 
 ---
 
-## 🌐 Localization
+## 🧑‍💻 Author
 
-- Text domains and translation support will be added in future releases
-
----
-
-## 📅 Roadmap
-
-- [x] FSE support via `block-template` files
-- [x] Radius filtering with ZIP + geocoding
-- [x] “Open Now” logic and badge display
-- [x] Leaflet maps with dynamic markers
-- [x] Responsive SCSS layout + dark mode
-- [x] Distance display per card
-- [ ] Saved Favorites (via localStorage)
-- [ ] “Open Now Near Me” filter using Geolocation
-- [ ] Ratings, reviews, or comments per coffee shop
-- [ ] Submit to WordPress plugin repo
-- [ ] Convert to freemium or Pro version
+Built with ☕ and ❤️ by [Jon Imms](https://jonimms.com)
 
 ---
 
-## 👨‍💻 Author
+## 📄 License
 
-**Jon Imms**  
-WordPress Developer from Newcastle upon Tyne, now living in Omaha, Nebraska.  
-🌐 https://jonimms.com
-
----
-
-## 📖 License
-
-MIT License  
-Free for personal or commercial use. Attribution appreciated.
-
----
-
-Enjoy your brew! ☕️
+MIT — free to use, modify, and share.
