@@ -1,0 +1,12 @@
+{
+  "apiVersion": 2,
+  "name": "ocd/map-filter",
+  "title": "Map & Filters",
+  "category": "widgets",
+  "icon": "location-alt",
+  "description": "Displays the map and filter UI for coffee shops.",
+  "editorScript": "ocd-map-block",
+  "supports": {
+    "html": false
+  }
+}

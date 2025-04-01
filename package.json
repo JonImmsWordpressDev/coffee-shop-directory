@@ -1,0 +1,10 @@
+{
+  "name": "coffee-shop-directory",
+  "version": "1.0.0",
+  "scripts": {
+    "scss": "sass --watch scss/style.scss css/style.css"
+  },
+  "devDependencies": {
+    "sass": "^1.69.0"
+  }
+}

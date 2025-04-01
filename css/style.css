@@ -1,0 +1,196 @@
+.coffee-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+@media (max-width: 768px) {
+  .coffee-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.coffee-filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  background: #f8f8f8;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+.coffee-filter-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 0.95rem;
+  flex: 1 1 180px;
+  min-width: 140px;
+}
+.coffee-filter-form label select,
+.coffee-filter-form label input[type=text] {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+.coffee-filter-form .checkbox-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  flex: 1 1 160px;
+  min-width: 140px;
+}
+.coffee-filter-form .checkbox-group input[type=checkbox] {
+  margin: 0;
+  transform: scale(1.2);
+  accent-color: #c78b36;
+}
+.coffee-filter-form button {
+  background-color: #c78b36;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 0.95rem;
+}
+.coffee-filter-form button:hover {
+  background-color: rgb(158.8853754941, 110.9802371542, 43.1146245059);
+}
+.coffee-filter-form button#clear-filters {
+  background: #eee;
+  color: #333;
+}
+.coffee-filter-form button#clear-filters:hover {
+  background: #ddd;
+}
+@media (max-width: 768px) {
+  .coffee-filter-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .coffee-filter-form label,
+  .coffee-filter-form .checkbox-group {
+    width: 100%;
+  }
+  .coffee-filter-form button {
+    width: 100%;
+  }
+}
+
+.coffee-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease;
+}
+.coffee-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.coffee-card h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+}
+.coffee-card h2 a {
+  text-decoration: none;
+  color: #222;
+}
+.coffee-card h2 a:hover {
+  text-decoration: underline;
+}
+.coffee-card .ph {
+  font-size: 1rem;
+  vertical-align: middle;
+  margin-right: 0.35rem;
+  color: #666;
+}
+.coffee-card p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+}
+.coffee-card .badge {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.coffee-card .badge-open {
+  background: #def5e1;
+  color: #0f5132;
+}
+.coffee-card .badge-closed {
+  background: #f8d7da;
+  color: #842029;
+}
+.coffee-card .badge small {
+  display: block;
+  font-weight: normal;
+  font-size: 0.75rem;
+  margin-top: 0.2rem;
+}
+.coffee-card ul.opening-hours {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.75rem;
+}
+.coffee-card ul.opening-hours li {
+  font-size: 0.85rem;
+  margin-bottom: 0.15rem;
+}
+.coffee-card ul.opening-hours li.today {
+  font-weight: bold;
+  color: #c78b36;
+}
+.coffee-card ul.opening-hours li .closed {
+  color: #999;
+  font-style: italic;
+}
+
+#coffee-map {
+  width: 100%;
+  height: 400px;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.opening-hours {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+.opening-hours li {
+  font-size: 0.9rem;
+  padding: 0.3rem 0;
+  display: flex;
+  align-items: center;
+  color: #444;
+}
+.opening-hours li.today {
+  font-weight: bold;
+  color: #c78b36;
+}
+.opening-hours li i {
+  font-size: 1rem;
+  margin-right: 0.5rem;
+  color: #6c757d;
+}
+.opening-hours li .closed {
+  color: #6c757d;
+  font-style: italic;
+}
+
+/*# sourceMappingURL=style.css.map */

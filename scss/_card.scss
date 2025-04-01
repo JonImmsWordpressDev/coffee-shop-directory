@@ -1,0 +1,88 @@
+@use './variables';
+
+.coffee-card {
+  background: variables.$card-bg;
+  border: 1px solid variables.$card-border;
+  border-radius: variables.$border-radius;
+  padding: variables.$spacing;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+
+    a {
+      text-decoration: none;
+      color: #222;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .ph {
+    font-size: 1rem;
+    vertical-align: middle;
+    margin-right: 0.35rem;
+    color: #666;
+  }
+
+  p {
+    margin: 0.25rem 0;
+    font-size: 0.95rem;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+
+    &-open {
+      background: #def5e1;
+      color: #0f5132;
+    }
+
+    &-closed {
+      background: #f8d7da;
+      color: #842029;
+    }
+
+    small {
+      display: block;
+      font-weight: normal;
+      font-size: 0.75rem;
+      margin-top: 0.2rem;
+    }
+  }
+
+  ul.opening-hours {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.75rem;
+
+    li {
+      font-size: 0.85rem;
+      margin-bottom: 0.15rem;
+
+      &.today {
+        font-weight: bold;
+        color: variables.$primary;
+      }
+
+      .closed {
+        color: #999;
+        font-style: italic;
+      }
+    }
+  }
+}

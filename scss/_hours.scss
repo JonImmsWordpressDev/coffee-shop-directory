@@ -1,0 +1,31 @@
+@use 'variables';
+
+.opening-hours {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+
+  li {
+    font-size: 0.9rem;
+    padding: 0.3rem 0;
+    display: flex;
+    align-items: center;
+    color: #444;
+
+    &.today {
+      font-weight: bold;
+      color: variables.$primary;
+    }
+
+    i {
+      font-size: 1rem;
+      margin-right: 0.5rem;
+      color: variables.$gray-500;
+    }
+
+    .closed {
+      color: variables.$gray-500;
+      font-style: italic;
+    }
+  }
+}

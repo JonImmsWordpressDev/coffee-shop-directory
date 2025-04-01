@@ -1,0 +1,89 @@
+@use 'variables';
+@use 'sass:color';
+
+.coffee-filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: variables.$spacing;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  background: #f8f8f8;
+  padding: variables.$spacing;
+  border-radius: variables.$border-radius;
+  border: 1px solid #e0e0e0;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    font-size: 0.95rem;
+    flex: 1 1 180px;
+    min-width: 140px;
+
+    select,
+    input[type='text'] {
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+  }
+
+  // Checkbox field group
+  .checkbox-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    flex: 1 1 160px;
+    min-width: 140px;
+
+    input[type='checkbox'] {
+      margin: 0;
+      transform: scale(1.2);
+      accent-color: variables.$primary;
+    }
+  }
+
+  button {
+    background-color: variables.$primary;
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-size: 0.95rem;
+
+    &:hover {
+      background-color: color.adjust(variables.$primary, $lightness: -10%);
+    }
+
+    &#clear-filters {
+      background: #eee;
+      color: #333;
+
+      &:hover {
+        background: #ddd;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+
+    label,
+    .checkbox-group {
+      width: 100%;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+}
