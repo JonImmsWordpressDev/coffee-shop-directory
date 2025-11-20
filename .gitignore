@@ -1,0 +1,22 @@
+# IDE files
+.idea/
+.vscode/
+.claude/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local data files (Omaha-specific)
+omaha-coffee-data.json
+coffee-shops-import.json
+
+# Local documentation (environment-specific)
+QUICK-START.md
+DATA-COLLECTION-SUMMARY.md
+
+# Node modules
+node_modules/
+
+# Vendor
+vendor/

@@ -74,12 +74,80 @@ Filter results update the:
 1. Clone this repo to your plugins folder:
 
     ```bash
-    git clone https://github.com/yourusername/coffee-shop-directory.git wp-content/plugins/coffee-shop-directory
+    git clone https://github.com/JonImmsWordpressDev/coffee-shop-directory.git wp-content/plugins/coffee-shop-directory
     ```
 
 2. Activate the plugin in **Plugins → Installed Plugins**
 
 3. Visit **Coffee Shops** in the admin menu and start adding shops.
+
+---
+
+## 📥 Import Tools
+
+The plugin includes three methods for importing coffee shop data:
+
+### 1. WP-CLI Import (Recommended)
+
+Fast, reliable import using WP-CLI:
+
+```bash
+wp eval-file wp-content/plugins/coffee-shop-directory/wp-cli-import.php
+```
+
+Requires a JSON file at `coffee-shops-import.json` with the proper format.
+
+### 2. Generate Import Script
+
+Create a geocoded import file from raw coffee shop data:
+
+```bash
+php wp-content/plugins/coffee-shop-directory/generate-import.php
+```
+
+This script:
+- Reads coffee shop data from a source JSON file
+- Geocodes addresses using OpenStreetMap Nominatim API
+- Infers neighborhoods from addresses
+- Generates a WP-CLI compatible JSON import file
+
+### 3. Programmatic Import
+
+Alternative import method via PHP (no WP-CLI needed):
+
+```bash
+php wp-content/plugins/coffee-shop-directory/import-via-code.php
+```
+
+Or visit the file directly in your browser (requires admin permissions).
+
+**Import File Format:**
+
+```json
+[
+  {
+    "post_type": "coffee_shop",
+    "post_title": "Shop Name",
+    "post_status": "publish",
+    "post_content": "",
+    "tax_input": {
+      "neighborhood": ["neighborhood-slug"]
+    },
+    "meta_input": {
+      "_ocd_address": "123 Main St, City, State 12345",
+      "_ocd_latitude": "41.2565",
+      "_ocd_longitude": "-95.9345",
+      "_ocd_wifi": "1",
+      "_ocd_drive_thru": "0",
+      "_ocd_website": "https://example.com",
+      "_ocd_hours_monday_open": "07:00",
+      "_ocd_hours_monday_close": "18:00"
+    }
+  }
+]
+```
+
+See `IMPORT-INSTRUCTIONS.md` for detailed documentation.
 
 ---
 
@@ -109,7 +177,7 @@ Or manually:
 - Saved favorites
 - Pagination UI
 - Better drag/drop ordering
-- Custom post importer
+- ✅ Custom post importer
 - Category-level stats
 - Premium version?
 
