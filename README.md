@@ -185,7 +185,7 @@ Or manually:
 
 ## 🧑‍💻 Author
 
-Built with ☕ and ❤️ by [Jon Imms](https://jonimms.com)
+Built with ☕ and ❤️ by [Jon Imms](https://jonimms.com/blog/how-i-built-a-coffee-shop-directory-plugin-that-works-in-any-city/)
 
 ---
 
