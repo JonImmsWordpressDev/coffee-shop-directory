@@ -19,7 +19,7 @@ add_action('init', function () {
     ];
 
     foreach ($fields as $field) {
-        register_post_meta('coffee_shop', $field, [
+        $args = [
             'type' => 'string',
             'single' => true,
             'show_in_rest' => [
@@ -31,7 +31,11 @@ add_action('init', function () {
             'auth_callback' => function () {
                 return current_user_can('edit_posts');
             },
-        ]);
+        ];
+        if ($field === '_ocd_website') {
+            $args['sanitize_callback'] = 'esc_url_raw';
+        }
+        register_post_meta('coffee_shop', $field, $args);
     }
 
     // Register proper time fields

@@ -18,8 +18,9 @@
 
     <?php
     $website = get_post_meta(get_the_ID(), '_ocd_website', true);
-    if ($website) {
-        echo '<p><i class="ph ph-globe"></i> <a href="' . esc_url($website) . '" target="_blank" rel="noopener">' . parse_url($website, PHP_URL_HOST) . '</a></p>';
+    $website_host = $website ? wp_parse_url($website, PHP_URL_HOST) : '';
+    if ($website_host) {
+        echo '<p><i class="ph ph-globe"></i> <a href="' . esc_url($website) . '" target="_blank" rel="noopener">' . esc_html($website_host) . '</a></p>';
     }
 
     $lat = get_post_meta(get_the_ID(), '_ocd_latitude', true);
