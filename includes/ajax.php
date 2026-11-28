@@ -89,6 +89,24 @@ function ocd_handle_ajax_filter() {
 
     $response = ['html' => '', 'markers' => []];
 
+    // The map shows every matching shop, not just this page. Load More
+    // pages keep the markers drawn for page 1.
+    if ($paged <= 1) {
+        foreach ($filtered_ids as $shop_id) {
+            $lat = get_post_meta($shop_id, '_ocd_latitude', true);
+            $lng = get_post_meta($shop_id, '_ocd_longitude', true);
+
+            if ($lat && $lng) {
+                $response['markers'][] = [
+                    'title' => html_entity_decode(wp_strip_all_tags(get_the_title($shop_id)), ENT_QUOTES, 'UTF-8'),
+                    'lat' => $lat,
+                    'lng' => $lng,
+                    'url' => get_permalink($shop_id),
+                ];
+            }
+        }
+    }
+
     ob_start();
     if ($paged_query->have_posts()) {
         echo '<div class="coffee-grid">';
@@ -97,15 +115,6 @@ function ocd_handle_ajax_filter() {
 
             $lat = get_post_meta(get_the_ID(), '_ocd_latitude', true);
             $lng = get_post_meta(get_the_ID(), '_ocd_longitude', true);
-
-            if ($lat && $lng) {
-                $response['markers'][] = [
-                    'title' => get_the_title(),
-                    'lat' => $lat,
-                    'lng' => $lng,
-                    'url' => get_permalink(),
-                ];
-            }
 
 // 🔥 Make $distance available in card.php
             global $distance;
