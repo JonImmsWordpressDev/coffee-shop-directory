@@ -60,13 +60,15 @@ add_action('init', function () {
         ]);
     }
 });
-register_rest_field('coffee_shop', 'is_open_now', [
-    'get_callback' => function ($post_arr) {
-        return apply_filters('ocd_is_open_now', $post_arr['id']);
-    },
-    'schema' => [
-        'type' => 'boolean',
-        'description' => 'Whether the coffee shop is currently open',
-        'context' => ['view', 'edit'],
-    ],
-]);
+add_action('rest_api_init', function () {
+    register_rest_field('coffee_shop', 'is_open_now', [
+        'get_callback' => function ($post_arr) {
+            return (bool) apply_filters('ocd_is_open_now', ocd_is_open_now($post_arr['id']), $post_arr['id']);
+        },
+        'schema' => [
+            'type' => 'boolean',
+            'description' => 'Whether the coffee shop is currently open',
+            'context' => ['view', 'edit'],
+        ],
+    ]);
+});

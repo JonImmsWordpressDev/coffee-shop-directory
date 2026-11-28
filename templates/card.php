@@ -39,17 +39,7 @@
     $distance_display = $distance_miles !== null ? " – {$distance_miles} miles away" : '';
 
     // Determine open/closed status
-    $day = strtolower(current_time('l'));
-    $now = strtotime(current_time('H:i'));
-    $open = get_post_meta(get_the_ID(), "_ocd_hours_{$day}_open", true);
-    $close = get_post_meta(get_the_ID(), "_ocd_hours_{$day}_close", true);
-
-    $is_open = false;
-    if ($open && $close) {
-        $start = strtotime($open);
-        $end = strtotime($close);
-        $is_open = ($now >= $start && $now <= $end);
-    }
+    $is_open = ocd_is_open_now(get_the_ID());
 
     echo $is_open
         ? "<span class='badge badge-open'>Open Now{$distance_display}</span>"
