@@ -39,6 +39,11 @@ function ocd_handle_ajax_filter() {
             $user_lng = floatval($geo['lng']);
         } else {
             error_log("❌ Failed to geocode ZIP: $zipcode");
+            // Showing every shop here would look like they are all within the radius.
+            wp_send_json([
+                'html' => '<p>We couldn\'t find that ZIP code. Check it and try again.</p>',
+                'markers' => []
+            ]);
         }
     }
 
