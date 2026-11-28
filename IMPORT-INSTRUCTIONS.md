@@ -88,7 +88,7 @@ Use the included PHP script for more control.
 php import-via-code.php
 ```
 
-This will insert posts one-by-one using `wp_insert_post()` and show progress.
+This will insert posts one-by-one using `wp_insert_post()` and show progress. It only runs from the command line; requests to it over HTTP get a 403.
 
 ### Method 3: WordPress REST API
 
