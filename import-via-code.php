@@ -5,12 +5,17 @@
  * This script provides an alternative to WP-CLI for importing coffee shops.
  * It loads the WordPress environment and inserts posts one-by-one.
  *
- * Usage:
- * 1. From terminal: php import-via-code.php
- * 2. Or visit: http://your-site.local/wp-content/plugins/coffee-shop-directory/import-via-code.php
+ * Usage (command line only): php import-via-code.php
  *
  * WARNING: This will create duplicate posts if run multiple times!
  */
+
+// Command line only. Over HTTP this would let any logged-in user (or a
+// forged request from an admin's browser) bulk-insert posts.
+if (php_sapi_name() !== 'cli') {
+    http_response_code(403);
+    exit;
+}
 
 // Load WordPress
 $wp_load_path = dirname(dirname(dirname(dirname(__DIR__)))) . '/wp-load.php';
@@ -20,11 +25,6 @@ if (!file_exists($wp_load_path)) {
 }
 
 require_once $wp_load_path;
-
-// Check if we're allowed to run this
-if (!current_user_can('edit_posts') && php_sapi_name() !== 'cli') {
-    die("Error: You don't have permission to import posts.\n");
-}
 
 // Load the import data
 $import_file = __DIR__ . '/coffee-shops-import.json';

@@ -119,7 +119,7 @@ Alternative import method via PHP (no WP-CLI needed):
 php wp-content/plugins/coffee-shop-directory/import-via-code.php
 ```
 
-Or visit the file directly in your browser (requires admin permissions).
+It only runs from the command line; requests to it over HTTP get a 403.
 
 **Import File Format:**
 
