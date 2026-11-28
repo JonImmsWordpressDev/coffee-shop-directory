@@ -130,17 +130,41 @@ function ocd_handle_ajax_filter() {
     wp_send_json($response);
 }
 
-// Geocode a ZIP code
+// Geocode a US ZIP code (5 digits or ZIP+4). Results are cached, since
+// Nominatim's usage policy asks for caching and at most 1 request per second.
 function ocd_get_lat_lng_for_zip($zip) {
-    $url = "https://nominatim.openstreetmap.org/search?format=json&country=us&postalcode=" . urlencode($zip);
-    $response = wp_remote_get($url, ['user-agent' => 'WordPress Coffee Directory']);
-
-    if (!is_wp_error($response)) {
-        $data = json_decode(wp_remote_retrieve_body($response), true);
-        if (!empty($data[0]['lat']) && !empty($data[0]['lon'])) {
-            return ['lat' => $data[0]['lat'], 'lng' => $data[0]['lon']];
-        }
+    if (!preg_match('/^(\d{5})(?:-\d{4})?$/', trim((string) $zip), $m)) {
+        return null;
     }
+    $zip = $m[1];
+    $cache_key = 'ocd_zip_geo_' . $zip;
+
+    $cached = get_transient($cache_key);
+    if (is_array($cached)) {
+        return $cached;
+    }
+    if ($cached === 'miss') {
+        return null;
+    }
+
+    $url = "https://nominatim.openstreetmap.org/search?format=json&country=us&postalcode=" . urlencode($zip);
+    $response = wp_remote_get($url, ['user-agent' => 'Coffee Shop Directory (' . home_url('/') . ')']);
+
+    if (is_wp_error($response) || wp_remote_retrieve_response_code($response) !== 200) {
+        // Upstream error or rate limit: back off briefly instead of retrying on every request.
+        set_transient($cache_key, 'miss', 5 * MINUTE_IN_SECONDS);
+        return null;
+    }
+
+    $data = json_decode(wp_remote_retrieve_body($response), true);
+    if (!empty($data[0]['lat']) && !empty($data[0]['lon'])) {
+        $geo = ['lat' => $data[0]['lat'], 'lng' => $data[0]['lon']];
+        // ZIP centroids don't move.
+        set_transient($cache_key, $geo, 30 * DAY_IN_SECONDS);
+        return $geo;
+    }
+
+    set_transient($cache_key, 'miss', HOUR_IN_SECONDS);
     return null;
 }
 
