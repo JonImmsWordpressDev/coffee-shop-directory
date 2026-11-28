@@ -45,8 +45,20 @@ jQuery(document).ready(function ($) {
         fetchShops();
     });
 
-    $('#ocd-filters').on('change input', 'select, input[type=checkbox], input[type=text]', function () {
+    $('#ocd-filters').on('change input', 'select, input[type=checkbox]', function () {
         fetchShops();
+    });
+
+    // Wait for a pause in typing, and skip partial ZIPs like "681" on the way to a full one.
+    let zipTimer = null;
+    $('#ocd-filters').on('change input', 'input[type=text]', function () {
+        const zip = $(this).val().trim();
+        clearTimeout(zipTimer);
+        zipTimer = setTimeout(function () {
+            if (zip === '' || /^\d{5}(-\d{4})?$/.test(zip)) {
+                fetchShops();
+            }
+        }, 300);
     });
 
     $('#ocd-results').on('click', '.load-more', function () {
